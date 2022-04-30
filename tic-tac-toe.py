@@ -1,21 +1,31 @@
 from pdb import Restart
 from tkinter import N
 
-gameBoard = {'1': ' ', '2': ' ', '3': ' ','4': ' ','5':' ','6':' ','7':' ','8':' ','9':' '}    
+#Tic-Tac-Toe
+#By: Mandy Beck
+
+gameBoard = {'1': ' ', '2': ' ', '3': ' ','4': ' ','5':' ','6':' ','7':' ','8':' ','9':' '}   
+
+board_keys = []
+
+for key in gameBoard:
+    board_keys.append(key) 
     
 def printBoard(board):
+    print("")
     print(board['1'] + ' | ' + board['2'] + ' | ' + board['3'])
-    print('--+--+--')
+    print('--+---+--')
     print(board['4'] + ' | ' + board['5'] + ' | ' + board['6'])
-    print('--+--+--')
+    print('--+---+--')
     print(board['7'] + ' | ' + board['8'] + ' | ' + board['9'])
+    print("")
     
-def game():
+def main():
     turn = 'X'
     count = 0
-    for i in range(10):
+    for i in range(9):
         printBoard(gameBoard)
-        print("It's " + turn + "'s turn. Which number would you like to claim?")
+        print("It's " + turn + "'s turn to choose a square. (1-9): ")
         move = input()
         
         if gameBoard[move] == ' ':
@@ -66,16 +76,24 @@ def game():
                 print(turn + "'s won!")
                 break
         
-        if count == 9:
+        while count == 9:
             print("Game Over")
             print("Cat's Eye! It's a tie!!!")
+            break
             
         if turn == 'X':
             turn = 'O'
         else:
             turn = 'X'
+            
+    playAgain()
         
-        
-
+def playAgain():
+    restart = input("Do you want to play again? (y/n)")
+    if restart == "y" or restart == "Y":
+        for key in board_keys:
+            gameBoard[key] = ' '
+        main()
+       
 if __name__ == "__main__":
-    game()
+    main()
